@@ -1,0 +1,50 @@
+body {
+    background-color: #2B313B;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    color: white;
+    flex-grow: 4;
+    width: 90%;
+    margin-left: 20%;
+}
+
+button {
+    background: #2B313B;
+    border-color: white;
+    border-style: dashed;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
+    padding: 10px;
+}
+
+a {
+    background: #2B313B;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
+    padding: 10px;
+}
+
+input {
+    background: #2B313B;
+    border-color: white;
+    border-style: dashed;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
+    padding: 10px;
+}
+
+h1 {
+    width: 100%;
+}
+h2{
+    width: 60%;
+}
+#jsonData{
+    color: darkgrey;
+    border: white;
+    text-align: center;
+}
+
