@@ -2,12 +2,12 @@ function getVerticalBarChart(data) {
     return {
         "graphset": [{
             "type": "bar",
-            "background-color": "white",
+            "background-color": "#2B313B",
             "title": {
                 "text": "График зависимостей по предметам",
-                "font-color": "#7E7E7E",
+                "font-color": "#fff",
                 "backgroundColor": "none",
-                "font-size": "22px",
+                "font-size": "10px",
                 "alpha": 1,
                 "adjust-layout": true,
             },
@@ -15,35 +15,21 @@ function getVerticalBarChart(data) {
                 "margin": "dynamic"
             },
             "legend": {
-                "layout": "x3",
-                "overflow": "page",
-                "alpha": 0.05,
-                "shadow": false,
                 "align": "center",
-                "adjust-layout": true,
                 "marker": {
                     "type": "circle",
                     "border-color": "none",
                     "size": "10px"
                 },
-                "border-width": 0,
-                "maxItems": 3,
-                "toggle-action": "hide",
-                "pageOn": {
-                    "backgroundColor": "#000",
-                    "size": "10px",
-                    "alpha": 0.65
-                },
-                "pageOff": {
-                    "backgroundColor": "#7E7E7E",
-                    "size": "10px",
-                    "alpha": 0.65
-                },
-                "pageStatus": {
-                    "color": "black"
-                }
             },
             "plot": {
+                "tooltip": {
+                    "padding": "5 10",
+                    "border-width": 2,
+                    "border-radius": 5,
+                    "alpha": 0.75,
+                    "text": "Среднее значение = %node-value",
+                },
                 "bars-space-left": 0.15,
                 "bars-space-right": 0.15,
                 "animation": {
@@ -54,9 +40,9 @@ function getVerticalBarChart(data) {
                 }
             },
             "scale-y": {
-                "line-color": "#7E7E7E",
+                "line-color": "#fff",
                 "item": {
-                    "font-color": "#7e7e7e"
+                    "font-color": "#fff"
                 },
                 "values": "2:5",
                 "guide": {
@@ -67,10 +53,11 @@ function getVerticalBarChart(data) {
                     "font-family": "arial",
                     "bold": true,
                     "font-size": "14px",
-                    "font-color": "#7E7E7E",
+                    "font-color": "#fff",
                 },
             },
             "scaleX": {
+                "color": "#fff",
                 "values": [
                     data.subjectsArrEge[0],
                     data.subjectsArrEge[1],
@@ -83,17 +70,10 @@ function getVerticalBarChart(data) {
                 },
                 "itemsOverlap": true,
                 "item": {
-                    "offsetY": -55
+                    "offsetY": -55,
+                    "font-color": "#fff"
+
                 }
-            },
-            "tooltip": {
-                "background-color": "#f90",
-                "padding": "5 10",
-                "border-color": "#009",
-                "border-width": 2,
-                "border-radius": 5,
-                "alpha": 0.75,
-                "text": "Среднее значение = %node-value",
             },
             "series": [{
                 "values": [

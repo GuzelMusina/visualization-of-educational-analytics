@@ -3,7 +3,7 @@ function getPieChartConfig(data) {
         type: 'pie',
         backgroundColor: '#2B313B',
         title: {
-            text: 'Global Browser Usage',
+            text: 'Корреляция данных ЕГЭ и экзамена',
             align: 'left',
             fontColor: '#fff',
             fontFamily: 'Open Sans',
@@ -11,6 +11,7 @@ function getPieChartConfig(data) {
             offsetX: '10px',
         },
         plot: {
+            width: '100%',
             tooltip: {
                 text: 'Нажмите чтобы узнать подробнее о %npv%',
                 padding: '5 10',

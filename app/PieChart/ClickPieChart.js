@@ -1,4 +1,4 @@
-function clickToPieChart(pieChart, anotherChart0, anotherChart1, id0, id1){
+function clickToPieChart(pieChart, anotherChart0, anotherChart1, id0, id1) {
     element = document.getElementById(pieChart);
     element.addEventListener('click', function (event) {
         var target = event.target;
@@ -10,6 +10,8 @@ function clickToPieChart(pieChart, anotherChart0, anotherChart1, id0, id1){
             var childrenUL = document.getElementById(anotherChart1);
             childrenUL.hidden = !childrenUL.hidden;
         }
+
     });
 }
+
 
