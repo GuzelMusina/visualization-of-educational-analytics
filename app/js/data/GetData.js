@@ -1,5 +1,41 @@
 function Data(egeScore, examScore, subjectsArr, subj1, subj2, subj3) {
     Object.defineProperties(this, {
+            sub1Ege: {
+                get() {
+                    return subj1[2];
+                }
+
+            },
+            sub2Ege: {
+                get() {
+                    return subj2[2];
+                }
+
+            },
+            sub3Ege: {
+                get() {
+                    return subj3[2];
+                }
+
+            },
+            sub1Ex: {
+                get() {
+                    return subj1[1];
+                }
+
+            },
+            sub2Ex: {
+                get() {
+                    return subj2[1];
+                }
+
+            },
+            sub3Ex: {
+                get() {
+                    return subj3[1];
+                }
+
+            },
             egeScoreSub1: {
                 get() {
                     return countAverage(subj1[0]);
@@ -137,6 +173,10 @@ function Data(egeScore, examScore, subjectsArr, subj1, subj2, subj3) {
                     return Math.abs(correlation);
                 }
             },
+            prediction: {
+                get: prediction(this)
+
+            }
         }
     );
 

@@ -31,14 +31,16 @@ function getOneSubject1(jsonObj) {
     let oneSubjectArray = [];
     let oneSubjectArrayEge = [];
     let oneSubjectArrayEx = [];
-
+    let oneSubjectArrayEgeClean = [];
     for (let i = 0; i < jsonObj.length; i++) {
         oneSubjectArrayEge.push(convertToScore(jsonObj[i].ege_bc1));
         oneSubjectArrayEx.push(jsonObj[i].ex_bc1);
+        oneSubjectArrayEgeClean.push(jsonObj[i].ege_bc1);
     }
 
     oneSubjectArray.push(oneSubjectArrayEge);
     oneSubjectArray.push(oneSubjectArrayEx);
+    oneSubjectArray.push(oneSubjectArrayEgeClean);
 
     return oneSubjectArray;
 }
@@ -47,13 +49,15 @@ function getOneSubject2(jsonObj) {
     let oneSubjectArray = [];
     let oneSubjectArrayEge = [];
     let oneSubjectArrayEx = [];
-
+    let oneSubjectArrayEgeClean = [];
     for (let i = 0; i < jsonObj.length; i++) {
         oneSubjectArrayEge.push(convertToScore(jsonObj[i].ege_bc2));
         oneSubjectArrayEx.push(jsonObj[i].ex_bc2);
+        oneSubjectArrayEgeClean.push(jsonObj[i].ege_bc2);
     }
     oneSubjectArray.push(oneSubjectArrayEge);
     oneSubjectArray.push(oneSubjectArrayEx);
+    oneSubjectArray.push(oneSubjectArrayEgeClean);
 
     return oneSubjectArray;
 }
@@ -62,13 +66,16 @@ function getOneSubject3(jsonObj) {
     let oneSubjectArray = [];
     let oneSubjectArrayEge = [];
     let oneSubjectArrayEx = [];
+    let oneSubjectArrayEgeClean = [];
 
     for (let i = 0; i < jsonObj.length; i++) {
         oneSubjectArrayEge.push(convertToScore(jsonObj[i].ege_bc3));
         oneSubjectArrayEx.push(jsonObj[i].ex_bc3);
+        oneSubjectArrayEgeClean.push(jsonObj[i].ege_bc3);
     }
     oneSubjectArray.push(oneSubjectArrayEge);
     oneSubjectArray.push(oneSubjectArrayEx);
+    oneSubjectArray.push(oneSubjectArrayEgeClean);
 
     return oneSubjectArray;
 }

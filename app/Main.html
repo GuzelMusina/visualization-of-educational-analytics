@@ -6,13 +6,15 @@
     <title>Correlation</title>
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
-    <script type="text/javascript" src="PieChart/PieChart.js"></script>
-    <script type="text/javascript" src="Data/GetData.js"></script>
-    <script type="text/javascript" src="Data/ReadJSON.js"></script>
-    <script type="text/javascript" src="PieChart/ClickPieChart.js"></script>
-    <script type="text/javascript" src="VerticalBarChart/VerticalBarChart.js"></script>
-    <script type="text/javascript" src="functions/getPlace.js"></script>
-    <script type="text/javascript" src="functions/addToLi.js"></script>
+    <script type="text/javascript" src="js/PieChart/PieChart.js"></script>
+    <script type="text/javascript" src="js/data/GetData.js"></script>
+    <script type="text/javascript" src="js/data/ReadJSON.js"></script>
+    <script type="text/javascript" src="js/PieChart/ClickPieChart.js"></script>
+    <script type="text/javascript" src="js/VerticalBarChart/VerticalBarChart.js"></script>
+    <script type="text/javascript" src="js/getPlace.js"></script>
+    <script type="text/javascript" src="js/addToLi.js"></script>
+    <script type="text/javascript" src="js/addToSelection.js"></script>
+    <script type="text/javascript" src="js/prediction.js"></script>
 
 
     <link rel="stylesheet" href="css/pieChart.css">
@@ -65,10 +67,36 @@
     <div id="modal_1" class="dlg-modal dlg-modal-slide">
         <span class="closer" data-close=""></span>
         <h3>Здесь предсказать можно будет</h3>
+        <select id="selectSub">
+            <option id="ssub1" value="ssub1"></option>
+            <option id="ssub2" value="ssub2"></option>
+            <option id="ssub3" value="ssub3"></option>
+        </select>
+        <select id="selectResult">
+            <option value="26">26</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+            <option value="60">60</option>
+            <option value="65">65</option>
+            <option value="70">70</option>
+            <option value="75">75</option>
+            <option value="80">80</option>
+            <option value="85">85</option>
+            <option value="90">90</option>
+            <option value="95">95</option>
+            <option value="100">100</option>
+        </select>
+        <button id="predict">Предсказать</button>
+        <h2>Результат: </h2>
+        <h2 id="answerIs"></h2>
     </div>
 </div>
 <script>var typeAnimate = 'slide';</script>
-<script src="functions/popup-css3.function.js"></script>
+<script src="js/popup-css3.function.js"></script>
 <script>
     window.smoothScrollTo = (function () {
         var timer, start, factor;
@@ -115,6 +143,8 @@
 
         addToLi0(getPlace(data.countCorrelation, data.countCorrelationForSubject1, data.countCorrelationForSubject2, data.countCorrelationForSubject3, data.subjectsArrEge));
         addToLi1(getPlace(data.countCorrelation, data.countCorrelationForSubject1, data.countCorrelationForSubject2, data.countCorrelationForSubject3, data.subjectsArrEge));
+        addToSelection(data.subjectsArrEge);
+        data.prediction;
 
         zingchart.render({
             id: 'pieChart',
