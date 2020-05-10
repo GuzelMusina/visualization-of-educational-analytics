@@ -1,6 +1,8 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Correlation</title>
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
@@ -17,20 +19,25 @@
     <link rel="stylesheet" href="css/verticalBarChart.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/description.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic" rel="stylesheet">
+    <link href="css/popup.style.css" rel="stylesheet">
 </head>
 <body>
 <div id="box">
     <ul class="container">
         <li id="pieChart"></li>
-        <p id="pieText">
+        <div id="pieText">
             Данные, представленные на графике зависимости отображают насколько баллы ЕГЭ за Биологию,
             Химию и Русский язык коррелируют с оценками за экзамен по тем же предметам на первом курсе
-        </p>
+        </div>
+    </ul>
+    <ul class="container">
         <ul id="Text0" onclick="openMore()" hidden>
             <h1 id="1sub0"></h1>
             <h2 id="2sub0"></h2>
             <h3 id="3sub0"></h3>
             <li id="sub0"></li>
+            <span class="closer" data-close=""></span>
         </ul>
 
         <ul id="Text1" onclick="openMore()" hidden>
@@ -38,6 +45,7 @@
             <h2 id="2sub1"></h2>
             <h3 id="3sub1"></h3>
             <li id="sub1"></li>
+            <span class="closer" data-close=""></span>
         </ul>
     </ul>
     <ul class="container">
@@ -48,6 +56,19 @@
         </p>
     </ul>
 </div>
+<div class="wrap">
+    <div class="btn-box">
+        <button type="button" class="btn btn-default" data-modal="modal_1">Предсказать</button>
+    </div>
+    <div class="overlay" data-close=""></div>
+
+    <div id="modal_1" class="dlg-modal dlg-modal-slide">
+        <span class="closer" data-close=""></span>
+        <h3>Здесь предсказать можно будет</h3>
+    </div>
+</div>
+<script>var typeAnimate = 'slide';</script>
+<script src="functions/popup-css3.function.js"></script>
 <script>
     window.smoothScrollTo = (function () {
         var timer, start, factor;
