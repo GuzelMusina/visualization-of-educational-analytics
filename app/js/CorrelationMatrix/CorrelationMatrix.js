@@ -1,54 +1,58 @@
 function getCorrelationMatrix(data) {
     return {
-        type: 'piano',
+        type: 'heatmap',
         backgroundColor: '#325598 #10203a',
         fillType: 'radial',
         plot: {
+            aspect: "none",
             valueBox: {
                 visible: false
             },
-            aspect: 'brightness',
             rules: [
                 {
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: '#191970',
                     rule: '%v == 1'
                 },
-                // {
-                //     backgroundColor: '#00008B',
-                //     rule: '%v >= 0,9 && %v < 1'
-                // },
-                // {
-                //     backgroundColor: '#4169E1',
-                //     rule: '%v >= 0,8 && %v < 0,9'
-                // },
-                // {
-                //     backgroundColor: '#6495ED',
-                //     rule: '%v >= 0,7 && %v < 0,8'
-                // },
-                // {
-                //     backgroundColor: '#87CEFA',
-                //     rule: '%v >= 0,6 && %v < 0,7'
-                // },
-                // {
-                //     backgroundColor: '#B0C4DE',
-                //     rule: '%v >= 0,5 && %v < 0,6'
-                // },
-                // {
-                //     backgroundColor: '#E0FFFF',
-                //     rule: '%v >= 0,4 && %v < 0,5'
-                // },
-                // {
-                //     backgroundColor: '#F0F8FF',
-                //     rule: '%v >= 0,3 && %v < 0,2'
-                // },
-                // {
-                //     backgroundColor: '#F0FFFF',
-                //     rule: '%v >= 0,2 && %v < 0,1'
-                // },
-                // {
-                //     backgroundColor: '#FFFFFF',
-                //     rule: '%v >= 0,1 && %v < 0'
-                // },
+                {
+                    backgroundColor: '#4169e1',
+                    rule: '%v >= 0.99 && %v < 1'
+                },
+                {
+                    backgroundColor: '#4682b4',
+                    rule: '%v >= 0.95 && %v < 0.99'
+                },
+                {
+                    backgroundColor: '#6495ed',
+                    rule: '%v >= 0.8 && %v < 0.95'
+                },
+                {
+                    backgroundColor: '#1e90ff',
+                    rule: '%v >= 0.7 && %v < 0.8'
+                },
+                {
+                    backgroundColor: '#87CEFA',
+                    rule: '%v >= 0.6 && %v < 0.7'
+                },
+                {
+                    backgroundColor: '#B0C4DE',
+                    rule: '%v >= 0.5 && %v < 0.6'
+                },
+                {
+                    backgroundColor: '#E0FFFF',
+                    rule: '%v >= 0.4 && %v < 0.5'
+                },
+                {
+                    backgroundColor: '#F0F8FF',
+                    rule: '%v >= 0.3 && %v < 0.4'
+                },
+                {
+                    backgroundColor: '#F0FFFF',
+                    rule: '%v >= 0.2 && %v < 0.3'
+                },
+                {
+                    backgroundColor: '#FFFFFF',
+                    rule: '%v>=0 && %v < 0.2'
+                }
             ]
         },
         plotarea: {
