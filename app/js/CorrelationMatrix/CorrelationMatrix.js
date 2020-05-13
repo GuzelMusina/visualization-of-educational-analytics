@@ -1,0 +1,224 @@
+function getCorrelationMatrix(data) {
+    return {
+        type: 'piano',
+        backgroundColor: '#325598 #10203a',
+        fillType: 'radial',
+        plot: {
+            valueBox: {
+                visible: false
+            },
+            aspect: 'brightness',
+            rules: [
+                {
+                    backgroundColor: '#FFFFFF',
+                    rule: '%v == 1'
+                },
+                // {
+                //     backgroundColor: '#00008B',
+                //     rule: '%v >= 0,9 && %v < 1'
+                // },
+                // {
+                //     backgroundColor: '#4169E1',
+                //     rule: '%v >= 0,8 && %v < 0,9'
+                // },
+                // {
+                //     backgroundColor: '#6495ED',
+                //     rule: '%v >= 0,7 && %v < 0,8'
+                // },
+                // {
+                //     backgroundColor: '#87CEFA',
+                //     rule: '%v >= 0,6 && %v < 0,7'
+                // },
+                // {
+                //     backgroundColor: '#B0C4DE',
+                //     rule: '%v >= 0,5 && %v < 0,6'
+                // },
+                // {
+                //     backgroundColor: '#E0FFFF',
+                //     rule: '%v >= 0,4 && %v < 0,5'
+                // },
+                // {
+                //     backgroundColor: '#F0F8FF',
+                //     rule: '%v >= 0,3 && %v < 0,2'
+                // },
+                // {
+                //     backgroundColor: '#F0FFFF',
+                //     rule: '%v >= 0,2 && %v < 0,1'
+                // },
+                // {
+                //     backgroundColor: '#FFFFFF',
+                //     rule: '%v >= 0,1 && %v < 0'
+                // },
+            ]
+        },
+        plotarea: {
+            margin: '30px 30px 85px 105px',
+            backgroundColor: 'none'
+        },
+        scaleX: {
+            values: data.fields,
+            alpha: 0.5,
+            item: {
+                paddingTop: '5px',
+                fontColor: '#93abc9',
+                fontFamily: 'arial',
+                fontSize: '10px',
+            },
+            itemsOverlap: true,
+            lineColor: '#000',
+            lineWidth: '2px',
+            maxLabels: 999,
+            textAlign: 'right',
+            tick: {
+                visible: false
+            }
+        },
+        scaleY: {
+            values: [data.fields[8], data.fields[7], data.fields[6], data.fields[5],
+                data.fields[4], data.fields[3], data.fields[2], data.fields[1], data.fields[0]],
+            item: {
+                paddingRight: '5px',
+                fontColor: '#93abc9',
+                fontFamily: 'arial',
+                fontSize: '10px',
+                textAlign: 'right'
+            },
+            lineColor: '#000',
+            lineWidth: '2px',
+            tick: {
+                alpha: 0.5,
+                lineColor: '#000'
+            }
+        },
+        tooltip: {
+            text: 'Коэфициент корреляции<br>%k и %t:<br><b>%v</b>',
+            padding: '5px 10px',
+            borderColor: 'none',
+            borderRadius: '8px',
+            borderWidth: '0px',
+            fontColor: '#fff',
+            fontFamily: 'Arial',
+            fontSize: '10px',
+            fontWeight: 'normal',
+            shadow: false
+        },
+        series: [
+            {
+                text: data.fields[8],
+                values: [countCorrelation(data.sub3Ex, data.getGender),
+                    countCorrelation(data.sub3Ex, data.getEducationType),
+                    countCorrelation(data.sub3Ex, data.getEgeScore),
+                    countCorrelation(data.sub3Ex, data.sub1Ege),
+                    countCorrelation(data.sub3Ex, data.sub2Ege),
+                    countCorrelation(data.sub3Ex, data.sub3Ege),
+                    countCorrelation(data.sub3Ex, data.sub1Ex),
+                    countCorrelation(data.sub3Ex, data.sub2Ex),
+                    countCorrelation(data.sub3Ex, data.sub3Ex),
+                ]
+            },
+            {
+                text: data.fields[7],
+                values: [countCorrelation(data.sub2Ex, data.getGender),
+                    countCorrelation(data.sub2Ex, data.getEducationType),
+                    countCorrelation(data.sub2Ex, data.getEgeScore),
+                    countCorrelation(data.sub2Ex, data.sub1Ege),
+                    countCorrelation(data.sub2Ex, data.sub2Ege),
+                    countCorrelation(data.sub2Ex, data.sub3Ege),
+                    countCorrelation(data.sub2Ex, data.sub1Ex),
+                    countCorrelation(data.sub2Ex, data.sub2Ex),
+                    countCorrelation(data.sub2Ex, data.sub3Ex),
+                ]
+            },
+            {
+                text: data.fields[6],
+                values: [countCorrelation(data.sub1Ex, data.getGender),
+                    countCorrelation(data.sub1Ex, data.getEducationType),
+                    countCorrelation(data.sub1Ex, data.getEgeScore),
+                    countCorrelation(data.sub1Ex, data.sub1Ege),
+                    countCorrelation(data.sub1Ex, data.sub2Ege),
+                    countCorrelation(data.sub1Ex, data.sub3Ege),
+                    countCorrelation(data.sub1Ex, data.sub1Ex),
+                    countCorrelation(data.sub1Ex, data.sub2Ex),
+                    countCorrelation(data.sub1Ex, data.sub3Ex),
+                ]
+            },
+            {
+                text: data.fields[5],
+                values: [countCorrelation(data.sub3Ege, data.getGender),
+                    countCorrelation(data.sub3Ege, data.getEducationType),
+                    countCorrelation(data.sub3Ege, data.getEgeScore),
+                    countCorrelation(data.sub3Ege, data.sub1Ege),
+                    countCorrelation(data.sub3Ege, data.sub2Ege),
+                    countCorrelation(data.sub3Ege, data.sub3Ege),
+                    countCorrelation(data.sub3Ege, data.sub1Ex),
+                    countCorrelation(data.sub3Ege, data.sub2Ex),
+                    countCorrelation(data.sub3Ege, data.sub3Ex),
+                ]
+            }, {
+                text: data.fields[4],
+                values: [countCorrelation(data.sub2Ege, data.getGender),
+                    countCorrelation(data.sub2Ege, data.getEducationType),
+                    countCorrelation(data.sub2Ege, data.getEgeScore),
+                    countCorrelation(data.sub2Ege, data.sub1Ege),
+                    countCorrelation(data.sub2Ege, data.sub2Ege),
+                    countCorrelation(data.sub2Ege, data.sub3Ege),
+                    countCorrelation(data.sub2Ege, data.sub1Ex),
+                    countCorrelation(data.sub2Ege, data.sub2Ex),
+                    countCorrelation(data.sub2Ege, data.sub3Ex),
+                ]
+            },
+            {
+                text: data.fields[3],
+                values: [countCorrelation(data.sub1Ege, data.getGender),
+                    countCorrelation(data.sub1Ege, data.getEducationType),
+                    countCorrelation(data.sub1Ege, data.getEgeScore),
+                    countCorrelation(data.sub1Ege, data.sub1Ege),
+                    countCorrelation(data.sub1Ege, data.sub2Ege),
+                    countCorrelation(data.sub1Ege, data.sub3Ege),
+                    countCorrelation(data.sub1Ege, data.sub1Ex),
+                    countCorrelation(data.sub1Ege, data.sub2Ex),
+                    countCorrelation(data.sub1Ege, data.sub3Ex),
+                ]
+            },
+            {
+                text: data.fields[2],
+                values: [countCorrelation(data.getEgeScore, data.getGender),
+                    countCorrelation(data.getEgeScore, data.getEducationType),
+                    countCorrelation(data.getEgeScore, data.getEgeScore),
+                    countCorrelation(data.getEgeScore, data.sub1Ege),
+                    countCorrelation(data.getEgeScore, data.sub2Ege),
+                    countCorrelation(data.getEgeScore, data.sub3Ege),
+                    countCorrelation(data.getEgeScore, data.sub1Ex),
+                    countCorrelation(data.getEgeScore, data.sub2Ex),
+                    countCorrelation(data.getEgeScore, data.sub3Ex),
+                ]
+            },
+            {
+                text: data.fields[1],
+                values: [countCorrelation(data.getEducationType, data.getGender),
+                    countCorrelation(data.getEducationType, data.getEducationType),
+                    countCorrelation(data.getEducationType, data.getEgeScore),
+                    countCorrelation(data.getEducationType, data.sub1Ege),
+                    countCorrelation(data.getEducationType, data.sub2Ege),
+                    countCorrelation(data.getEducationType, data.sub3Ege),
+                    countCorrelation(data.getEducationType, data.sub1Ex),
+                    countCorrelation(data.getEducationType, data.sub2Ex),
+                    countCorrelation(data.getEducationType, data.sub3Ex),
+                ]
+            },
+            {
+                text: data.fields[0],
+                values: [countCorrelation(data.getGender, data.getGender),
+                    countCorrelation(data.getGender, data.getEducationType),
+                    countCorrelation(data.getGender, data.getEgeScore),
+                    countCorrelation(data.getGender, data.sub1Ege),
+                    countCorrelation(data.getGender, data.sub2Ege),
+                    countCorrelation(data.getGender, data.sub3Ege),
+                    countCorrelation(data.getGender, data.sub1Ex),
+                    countCorrelation(data.getGender, data.sub2Ex),
+                    countCorrelation(data.getGender, data.sub3Ex),
+                ]
+            }
+        ]
+    };
+}

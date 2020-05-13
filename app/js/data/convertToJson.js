@@ -15,7 +15,18 @@ document.getElementById("uploadExcel")
                 workbook.SheetNames.forEach(sheet => {
                     let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
                     let jsonObject = JSON.stringify(rowObject);
-                    document.getElementById("jsonData").innerHTML = jsonObject;
+
+                    let blob = new Blob([jsonObject], {type: 'type/json'});
+                    let anchor = document.createElement('a');
+                    anchor.download = "file.json";
+                    anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
+                    alert(anchor.href);
+                    anchor.dataset.downloadurl = ['text/json', anchor.download, anchor.href].join(':');
+                    alert(anchor.dataset);
+                    alert(anchor.dataset.downloadurl);
+                    anchor.click();
+
+                   // document.getElementById("jsonData").innerHTML = jsonObject;
                 });
             };
             fileReader.readAsBinaryString(selectedFile);

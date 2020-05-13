@@ -15,6 +15,8 @@
     <script type="text/javascript" src="js/addToLi.js"></script>
     <script type="text/javascript" src="js/addToSelection.js"></script>
     <script type="text/javascript" src="js/prediction.js"></script>
+    <script type="text/javascript" src="js/CorrelationMatrix/CorrelationMatrix.js"></script>
+    <script type="text/javascript" src="js/countCorrelation.js"></script>
 
 
     <link rel="stylesheet" href="css/pieChart.css">
@@ -58,6 +60,9 @@
         </p>
     </ul>
 </div>
+<div id="correlationMatrix">
+
+</div>
 <div class="wrap">
     <div class="btn-box">
         <button type="button" class="btn btn-default" data-modal="modal_1">Предсказать</button>
@@ -95,6 +100,11 @@
         <h2 id="answerIs"></h2>
     </div>
 </div>
+
+<!--<div class="btn-box">-->
+<!--    <button type="button" class="btn btn-default" ><a href="html/CorrelationMatrix.html">Посмотреть матрицу корреляции</a> </button>-->
+<!--</div>-->
+
 <script>var typeAnimate = 'slide';</script>
 <script src="js/popup-css3.function.js"></script>
 <script>
@@ -131,7 +141,7 @@
 </script>
 <script>
     let request = new XMLHttpRequest();
-    request.open('GET', './resources/file1.json', true);
+    request.open('GET', './resources/file.json', true);
     request.responseType = 'text';
     request.send();
 
@@ -139,12 +149,13 @@
         const test = request.response;
         const jsonObj = JSON.parse(test);
         let data = new Data(getEgeSumArr(jsonObj), getExSumArr(jsonObj), getSubjectName(jsonObj), getOneSubject1(jsonObj),
-            getOneSubject2(jsonObj), getOneSubject3(jsonObj));
+            getOneSubject2(jsonObj), getOneSubject3(jsonObj), getGender(jsonObj), getEducationType(jsonObj), getFields(jsonObj));
 
         addToLi0(getPlace(data.countCorrelation, data.countCorrelationForSubject1, data.countCorrelationForSubject2, data.countCorrelationForSubject3, data.subjectsArrEge));
         addToLi1(getPlace(data.countCorrelation, data.countCorrelationForSubject1, data.countCorrelationForSubject2, data.countCorrelationForSubject3, data.subjectsArrEge));
         addToSelection(data.subjectsArrEge);
         data.prediction;
+
 
         zingchart.render({
             id: 'pieChart',
@@ -170,6 +181,10 @@
             id: 'verticalBarChart1',
             data: getVerticalBarChart(data),
         });
+        zingchart.render({
+            id: 'correlationMatrix',
+            data: getCorrelationMatrix(data),
+        })
     };
     clickToPieChart("pieChart", "Text0", "Text1", "pieChart-graph-id0-plotset-plot-0-node-0", "pieChart-graph-id0-plotset-plot-1-node-0");
 </script>
