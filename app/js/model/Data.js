@@ -1,13 +1,21 @@
-function Data(egeScore, examScore, subjectsArr, subj1, subj2, subj3, array_of_gender, array_of_education_type, fields) {
+function Data(ids, subj1, subj2, subj3, array_of_gender, array_of_education_type, fields) {
     Object.defineProperties(this, {
+            ids: {
+                get() {
+                    return ids;
+                }
+            }, idsInString: {
+                get() {
+                    let idsString = [];
+                    for (let i = 0; i < ids.length; i++) {
+                    idsString.push(ids[i].toString());
+                    }
+                    return idsString;
+                }
+            },
             fields: {
                 get() {
                     return fields;
-                }
-            },
-            fieldsReverse: {
-                get() {
-                    return fields.reverse();
                 }
             },
             getGender: {
@@ -24,121 +32,76 @@ function Data(egeScore, examScore, subjectsArr, subj1, subj2, subj3, array_of_ge
             },
             getEgeScore: {
                 get() {
-                    return egeScore;
+                    return getSumOfScoreArr(subj1[1], subj2[1], subj3[1]);
                 }
             },
             getExamScore: {
                 get() {
-                    return examScore;
+                    return getSumOfScoreArr(subj1[0], subj2[0], subj3[0]);
                 }
             },
             sub1Ege: {
                 get() {
-                    return subj1[2];
+                    return subj1[1];
                 }
             },
             sub2Ege: {
                 get() {
-                    return subj2[2];
+                    return subj2[1];
                 }
             },
             sub3Ege: {
                 get() {
-                    return subj3[2];
+                    return subj3[1];
                 }
             },
             sub1EgeMod: {
                 get() {
-                    return subj1[0];
+                    return convertToScore(subj1[1]);
                 }
             },
             sub2EgeMod: {
                 get() {
-                    return subj2[0];
+                    return convertToScore(subj2[1]);
                 }
             },
             sub3EgeMod: {
                 get() {
-                    return subj3[0];
+                    return convertToScore(subj3[1]);
                 }
             },
             sub1Ex: {
                 get() {
-                    return subj1[1];
+                    return subj1[0];
                 }
             },
             sub2Ex: {
                 get() {
-                    return subj2[1];
+                    return subj2[0];
                 }
             },
             sub3Ex: {
                 get() {
-                    return subj3[1];
-                }
-            },
-            egeScoreSub1: {
-                get() {
-                    return countAverage(subj1[0]);
-                }
-            },
-            examScoreSub1: {
-                get() {
-                    return countAverage(subj1[1]);
-                }
-            },
-            egeScoreSub2: {
-                get() {
-                    return countAverage(subj2[0]);
-                }
-            },
-            examScoreSub2: {
-                get() {
-                    return countAverage(subj2[1]);
-                }
-            },
-            egeScoreSub3: {
-                get() {
-                    return countAverage(subj3[0]);
-                }
-            },
-            examScoreSub3: {
-                get() {
-                    return countAverage(subj3[1]);
+                    return subj3[0];
                 }
             },
             subjectsArrEge: {
                 get: function () {
                     let newArr = [];
-                    for (let i = 0; i < subjectsArr.length / 2; i++) {
-                        newArr.push(subjectsArr[i])
-                    }
+                    newArr.push(subj1[3]);
+                    newArr.push(subj2[3]);
+                    newArr.push(subj3[3]);
                     return newArr;
                 }
             },
             subjectsArrEx: {
                 get: function () {
-                    let newArr = [];
-                    for (let i = subjectsArr.length / 2; i < subjectsArr.length; i++) {
-                        newArr.push(subjectsArr[i])
-                    }
+                    newArr.push(subj1[2]);
+                    newArr.push(subj2[2]);
+                    newArr.push(subj3[2]);
                     return newArr;
                 }
-            },
-            prediction: {
-                get: prediction(this)
             }
         }
     );
-
-    function countAverage(array) {
-        let sum_array_elements = 0;
-        for (let i = 0; i < array.length; i++) {
-            sum_array_elements += array[i];
-        }
-        sum_array_elements = sum_array_elements / array.length;
-
-        return sum_array_elements;
-    }
-
 }

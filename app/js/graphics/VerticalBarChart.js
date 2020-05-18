@@ -69,9 +69,9 @@ function getVerticalBarChart(data) {
             },
             "series": [{
                 "values": [
-                    data.egeScoreSub1,
-                    data.egeScoreSub2,
-                    data.egeScoreSub3,
+                    countAverage(data.sub1EgeMod),
+                    countAverage(data.sub2EgeMod),
+                    countAverage(data.sub3EgeMod),
                 ],
                 "borderRadiusTopLeft": 7,
                 "background-color": "#8993c7",
@@ -79,9 +79,9 @@ function getVerticalBarChart(data) {
             },
                 {
                     "values": [
-                        data.examScoreSub1,
-                        data.examScoreSub2,
-                        data.examScoreSub3,
+                        countAverage(data.sub1Ex),
+                        countAverage(data.sub1Ex),
+                        countAverage(data.sub1Ex),
                     ],
                     "borderRadiusTopLeft": 7,
                     "background-color": "#fdb462",

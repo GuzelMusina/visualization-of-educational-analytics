@@ -7,17 +7,25 @@
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
     <script type="text/javascript" src="js/graphics/PieChart.js"></script>
-    <script type="text/javascript" src="js/model/Data.js"></script>
-    <script type="text/javascript" src="js/data/ReadJSON.js"></script>
-    <script type="text/javascript" src="js/actions/clickPieChart.js"></script>
     <script type="text/javascript" src="js/graphics/VerticalBarChart.js"></script>
+    <script type="text/javascript" src="js/graphics/CorrelationMatrix.js"></script>
+    <script type="text/javascript" src="js/graphics/Filtration.js"></script>
+
+    <script type="text/javascript" src="js/model/Data.js"></script>
+
+    <script type="text/javascript" src="js/data/ReadJSON.js"></script>
+
+    <script type="text/javascript" src="js/actions/clickPieChart.js"></script>
+
     <script type="text/javascript" src="js/helpFunctions/getPlace.js"></script>
     <script type="text/javascript" src="js/helpFunctions/addToLi.js"></script>
     <script type="text/javascript" src="js/helpFunctions/addToPie.js"></script>
     <script type="text/javascript" src="js/helpFunctions/addToSelection.js"></script>
     <script type="text/javascript" src="js/helpFunctions/prediction.js"></script>
-    <script type="text/javascript" src="js/graphics/CorrelationMatrix.js"></script>
     <script type="text/javascript" src="js/helpFunctions/countCorrelation.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/convertToScrore.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/countAverage.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/getSumOfScoreArr.js"></script>
 
 
     <link rel="stylesheet" href="css/pieChart.css">
@@ -26,7 +34,8 @@
     <link rel="stylesheet" href="css/correlationMatrix.css">
     <link rel="stylesheet" href="css/description.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic" rel="stylesheet">
-    <link href="css/popup.style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/popup.style.css">
+    <link rel="stylesheet" href="css/filtration.css">
 </head>
 <body>
 <div id="box">
@@ -57,8 +66,8 @@
         <p id="verticalBarText"></p>
     </ul>
 
-        <div id="correlationMatrix"></div>
-
+    <div id="correlationMatrix"></div>
+    <div id="filtration"></div>
 
     <ul class="container">
         <div class="wrap">
@@ -88,7 +97,7 @@
 <script type="text/javascript" src="js/helpFunctions/addScoreToSelection.js"></script>
 
 <!--<div class="btn-box">-->
-<!--    <button type="button" class="btn btn-default" ><a href="html/CorrelationMatrix.html">Посмотреть матрицу корреляции</a> </button>-->
+<!--    <button type="button" class="btn btn-default" ><a href="html/Filtration.html">Посмотреть матрицу корреляции</a> </button>-->
 <!--</div>-->
 
 <script>var typeAnimate = 'slide';</script>
@@ -103,9 +112,8 @@
     request.onload = function () {
         const test = request.response;
         const jsonObj = JSON.parse(test);
-        let data = new Data(getEgeSumArr(jsonObj), getExSumArr(jsonObj), getSubjectName(jsonObj), getOneSubject1(jsonObj),
+        let data = new Data(getId(jsonObj), getOneSubject1(jsonObj),
             getOneSubject2(jsonObj), getOneSubject3(jsonObj), getGender(jsonObj), getEducationType(jsonObj), getFields(jsonObj));
-
         addToLi0(getPlace(countCorrelation(data.getExamScore, data.getEgeScore), countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod), countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
         addToLi1(getPlace(countCorrelation(data.getExamScore, data.getEgeScore), countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod), countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
 
@@ -141,7 +149,13 @@
         zingchart.render({
             id: 'correlationMatrix',
             data: getCorrelationMatrix(data),
-        })
+        });
+        zingchart.render({
+            id: 'filtration',
+            data: getFiltration(data),
+            height: '100%',
+            width: '100%',
+        });
     };
     clickToPieChart("pieChart", "Text0", "Text1", "pieChart-graph-id0-plotset-plot-0-node-0", "pieChart-graph-id0-plotset-plot-1-node-0");
 </script>
