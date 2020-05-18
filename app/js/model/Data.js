@@ -77,6 +77,36 @@ function Data(egeScore, examScore, subjectsArr, subj1, subj2, subj3, array_of_ge
                     return subj3[1];
                 }
             },
+            egeScoreSub1: {
+                get() {
+                    return countAverage(subj1[0]);
+                }
+            },
+            examScoreSub1: {
+                get() {
+                    return countAverage(subj1[1]);
+                }
+            },
+            egeScoreSub2: {
+                get() {
+                    return countAverage(subj2[0]);
+                }
+            },
+            examScoreSub2: {
+                get() {
+                    return countAverage(subj2[1]);
+                }
+            },
+            egeScoreSub3: {
+                get() {
+                    return countAverage(subj3[0]);
+                }
+            },
+            examScoreSub3: {
+                get() {
+                    return countAverage(subj3[1]);
+                }
+            },
             subjectsArrEge: {
                 get: function () {
                     let newArr = [];
@@ -95,6 +125,20 @@ function Data(egeScore, examScore, subjectsArr, subj1, subj2, subj3, array_of_ge
                     return newArr;
                 }
             },
+            prediction: {
+                get: prediction(this)
+            }
         }
     );
+
+    function countAverage(array) {
+        let sum_array_elements = 0;
+        for (let i = 0; i < array.length; i++) {
+            sum_array_elements += array[i];
+        }
+        sum_array_elements = sum_array_elements / array.length;
+
+        return sum_array_elements;
+    }
+
 }
