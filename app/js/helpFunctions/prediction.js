@@ -4,7 +4,7 @@ function prediction(data) {
         let subject = document.getElementById('selectSub').value;
         let result = document.getElementById('selectResult').value;
 
-        let answerIs = 0;
+        let answerIs = 2;
         if (subject === 'ssub1') {
             document.getElementById("answerIs").innerHTML = ' ';
             for (let i = 0; i < data.sub1Ege.length; i++) {

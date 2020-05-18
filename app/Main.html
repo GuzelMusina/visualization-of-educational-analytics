@@ -6,17 +6,18 @@
     <title>Correlation</title>
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
-    <script type="text/javascript" src="js/PieChart/PieChart.js"></script>
-    <script type="text/javascript" src="js/data/GetData.js"></script>
+    <script type="text/javascript" src="js/graphics/PieChart.js"></script>
+    <script type="text/javascript" src="js/model/Data.js"></script>
     <script type="text/javascript" src="js/data/ReadJSON.js"></script>
-    <script type="text/javascript" src="js/PieChart/ClickPieChart.js"></script>
-    <script type="text/javascript" src="js/VerticalBarChart/VerticalBarChart.js"></script>
-    <script type="text/javascript" src="js/getPlace.js"></script>
-    <script type="text/javascript" src="js/addToLi.js"></script>
-    <script type="text/javascript" src="js/addToSelection.js"></script>
-    <script type="text/javascript" src="js/prediction.js"></script>
-    <script type="text/javascript" src="js/CorrelationMatrix/CorrelationMatrix.js"></script>
-    <script type="text/javascript" src="js/countCorrelation.js"></script>
+    <script type="text/javascript" src="js/actions/clickPieChart.js"></script>
+    <script type="text/javascript" src="js/graphics/VerticalBarChart.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/getPlace.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToLi.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToPie.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToSelection.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/prediction.js"></script>
+    <script type="text/javascript" src="js/graphics/CorrelationMatrix.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/countCorrelation.js"></script>
 
 
     <link rel="stylesheet" href="css/pieChart.css">
@@ -30,10 +31,7 @@
 <div id="box">
     <ul class="container">
         <li id="pieChart"></li>
-        <div id="pieText">
-            Данные, представленные на графике зависимости отображают насколько баллы ЕГЭ за Биологию,
-            Химию и Русский язык коррелируют с оценками за экзамен по тем же предметам на первом курсе
-        </div>
+        <div id="pieText"></div>
     </ul>
     <ul class="container">
         <ul id="Text0" onclick="openMore()" hidden>
@@ -54,10 +52,7 @@
     </ul>
     <ul class="container">
         <li id="verticalBarChart"></li>
-        <p id="verticalBarText">
-            Это средний бал за ЕГЭ и Экзамен по каждому предмету. Можно заметить разницу между результатми
-            государственного экзамена и экзамена за первый курс.
-        </p>
+        <p id="verticalBarText"></p>
     </ul>
 </div>
 <div id="correlationMatrix">
@@ -106,39 +101,8 @@
 <!--</div>-->
 
 <script>var typeAnimate = 'slide';</script>
-<script src="js/popup-css3.function.js"></script>
-<script>
-    window.smoothScrollTo = (function () {
-        var timer, start, factor;
-
-        return function (target, duration) {
-            var offset = window.pageYOffset,
-                delta = target - window.pageYOffset; // Y-offset difference
-            duration = duration || 1000;              // default 1 sec animation
-            start = Date.now();                       // get start time
-            factor = 0;
-
-            if (timer) {
-                clearInterval(timer); // stop any running animations
-            }
-
-            function step() {
-                var y;
-                factor = (Date.now() - start) / duration; // get interpolation factor
-                if (factor >= 1) {
-                    clearInterval(timer); // stop animation
-                    factor = 1;           // clip to max 1.0
-                }
-                y = factor * delta + offset;
-                window.scrollBy(0, y - window.pageYOffset);
-            }
-
-            timer = setInterval(step, 10);
-            return timer;
-        };
-    }());
-
-</script>
+<script src="js/actions/popup-css3.function.js"></script>
+<script src="js/actions/windowSetUp.js"></script>
 <script>
     let request = new XMLHttpRequest();
     request.open('GET', './resources/file.json', true);
@@ -151,11 +115,13 @@
         let data = new Data(getEgeSumArr(jsonObj), getExSumArr(jsonObj), getSubjectName(jsonObj), getOneSubject1(jsonObj),
             getOneSubject2(jsonObj), getOneSubject3(jsonObj), getGender(jsonObj), getEducationType(jsonObj), getFields(jsonObj));
 
-        addToLi0(getPlace(data.countCorrelation, data.countCorrelationForSubject1, data.countCorrelationForSubject2, data.countCorrelationForSubject3, data.subjectsArrEge));
-        addToLi1(getPlace(data.countCorrelation, data.countCorrelationForSubject1, data.countCorrelationForSubject2, data.countCorrelationForSubject3, data.subjectsArrEge));
-        addToSelection(data.subjectsArrEge);
-        data.prediction;
+        addToLi0(getPlace(countCorrelation(data.getExamScore, data.getEgeScore), countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod), countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
+        addToLi1(getPlace(countCorrelation(data.getExamScore, data.getEgeScore), countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod), countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
 
+        addToSelection(data.subjectsArrEge);
+        prediction(data);
+        addToPie(data.subjectsArrEge);
+        addToVerticalBar(data.subjectsArrEge);
 
         zingchart.render({
             id: 'pieChart',

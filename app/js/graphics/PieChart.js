@@ -38,12 +38,12 @@ function getPieChartConfig(data) {
         series: [
             {
                 text: 'Зависит',
-                values: [data.countCorrelation],
+                values: [countCorrelation(data.getExamScore, data.getEgeScore)],
                 backgroundColor: '#50ADF5'
             },
             {
                 text: 'Не зависит',
-                values: [1 - data.countCorrelation],
+                values: [1 - countCorrelation(data.getExamScore, data.getEgeScore)],
                 backgroundColor: '#6FB07F'
             }
         ]
