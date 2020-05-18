@@ -2,3 +2,30 @@
     margin-left: 0;
 }
 
+html {
+    overflow: hidden;
+}
+
+body {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: -30px;
+    bottom: 0;
+    padding: 8px;
+    padding-right: 20px;
+    background-color: #2B313B;
+    overflow-y: scroll;
+}
+
+.container {
+    display: flex;
+    margin-left: 0;
+    margin-bottom: 5%;
+}
+
+.element {
+    height: 0;
+    width: 0;
+}
+

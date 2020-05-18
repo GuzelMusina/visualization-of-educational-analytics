@@ -3,14 +3,6 @@ function getVerticalBarChart(data) {
         "graphset": [{
             "type": "bar",
             "background-color": "#2B313B",
-            "title": {
-                "text": "График зависимостей по предметам",
-                "font-color": "#fff",
-                "backgroundColor": "none",
-                "font-size": "10px",
-                "alpha": 1,
-                "adjust-layout": true,
-            },
             "plotarea": {
                 "margin": "dynamic"
             },

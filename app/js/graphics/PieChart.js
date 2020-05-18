@@ -2,14 +2,6 @@ function getPieChartConfig(data) {
     return {
         type: 'pie',
         backgroundColor: '#2B313B',
-        title: {
-            text: 'Корреляция данных ЕГЭ и экзамена',
-            align: 'left',
-            fontColor: '#fff',
-            fontFamily: 'Open Sans',
-            fontSize: '25px',
-            offsetX: '10px',
-        },
         plot: {
             width: '100%',
             tooltip: {
@@ -33,7 +25,7 @@ function getPieChartConfig(data) {
             borderWidth: '5px'
         },
         plotarea: {
-            margin: '5 0 0 0'
+            margin: '5 20 5 5'
         },
         series: [
             {

@@ -1,30 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 
-html {
-    overflow: hidden;
-}
-
-body {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: -30px;
-    bottom: 0;
-    padding: 8px;
-    padding-right: 20px;
-    background-color: #2B313B;
-    overflow-y: scroll;
-}
-
-.container {
-    display: flex;
-    margin-left: 0;
-}
-
-.element{
-    height: 0;
-    width: 0;
-}
 #pieChart {
     margin:0;
     flex-grow: 7;

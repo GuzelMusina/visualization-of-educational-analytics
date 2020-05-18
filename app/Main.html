@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/pieChart.css">
     <link rel="stylesheet" href="css/verticalBarChart.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/correlationMatrix.css">
     <link rel="stylesheet" href="css/description.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic" rel="stylesheet">
     <link href="css/popup.style.css" rel="stylesheet">
@@ -30,6 +31,7 @@
 <body>
 <div id="box">
     <ul class="container">
+
         <li id="pieChart"></li>
         <div id="pieText"></div>
     </ul>
@@ -54,47 +56,36 @@
         <li id="verticalBarChart"></li>
         <p id="verticalBarText"></p>
     </ul>
-</div>
-<div id="correlationMatrix">
 
-</div>
-<div class="wrap">
-    <div class="btn-box">
-        <button type="button" class="btn btn-default" data-modal="modal_1">Предсказать</button>
-    </div>
-    <div class="overlay" data-close=""></div>
+        <div id="correlationMatrix"></div>
 
-    <div id="modal_1" class="dlg-modal dlg-modal-slide">
-        <span class="closer" data-close=""></span>
-        <h3>Здесь предсказать можно будет</h3>
-        <select id="selectSub">
-            <option id="ssub1" value="ssub1"></option>
-            <option id="ssub2" value="ssub2"></option>
-            <option id="ssub3" value="ssub3"></option>
-        </select>
-        <select id="selectResult">
-            <option value="26">26</option>
-            <option value="30">30</option>
-            <option value="35">35</option>
-            <option value="40">40</option>
-            <option value="45">45</option>
-            <option value="50">50</option>
-            <option value="55">55</option>
-            <option value="60">60</option>
-            <option value="65">65</option>
-            <option value="70">70</option>
-            <option value="75">75</option>
-            <option value="80">80</option>
-            <option value="85">85</option>
-            <option value="90">90</option>
-            <option value="95">95</option>
-            <option value="100">100</option>
-        </select>
-        <button id="predict">Предсказать</button>
-        <h2>Результат: </h2>
-        <h2 id="answerIs"></h2>
-    </div>
+
+    <ul class="container">
+        <div class="wrap">
+            <div class="btn-box">
+                <button type="button" class="btn btn-default" data-modal="modal_1">Предсказать</button>
+            </div>
+            <div class="overlay" data-close=""></div>
+
+            <div id="modal_1" class="dlg-modal dlg-modal-slide">
+                <span class="closer" data-close=""></span>
+                <h3>Здесь предсказать можно будет</h3>
+                <select id="selectSub">
+                    <option id="ssub1" value="ssub1"></option>
+                    <option id="ssub2" value="ssub2"></option>
+                    <option id="ssub3" value="ssub3"></option>
+                </select>
+                <select id="selectResult">
+                    <option value="1">1</option>
+                </select>
+                <button id="predict">Предсказать</button>
+                <h2>Результат: </h2>
+                <h2 id="answerIs"></h2>
+            </div>
+        </div>
+    </ul>
 </div>
+<script type="text/javascript" src="js/helpFunctions/addScoreToSelection.js"></script>
 
 <!--<div class="btn-box">-->
 <!--    <button type="button" class="btn btn-default" ><a href="html/CorrelationMatrix.html">Посмотреть матрицу корреляции</a> </button>-->
