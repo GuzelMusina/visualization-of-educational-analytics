@@ -80,8 +80,8 @@ function getVerticalBarChart(data) {
                 {
                     "values": [
                         countAverage(data.sub1Ex),
-                        countAverage(data.sub1Ex),
-                        countAverage(data.sub1Ex),
+                        countAverage(data.sub2Ex),
+                        countAverage(data.sub3Ex),
                     ],
                     "borderRadiusTopLeft": 7,
                     "background-color": "#fdb462",

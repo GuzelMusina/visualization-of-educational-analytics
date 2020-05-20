@@ -1,4 +1,5 @@
 function countCorrelation(firstObj, secondObj) {
+
     let correlation = 0;
 
     let x_av = 0;

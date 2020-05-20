@@ -15,7 +15,8 @@
 
     <script type="text/javascript" src="js/data/ReadJSON.js"></script>
 
-    <script type="text/javascript" src="js/actions/clickPieChart.js"></script>
+    <script type="text/javascript" src="js/actions/clickChart.js"></script>
+    <script type="text/javascript" src="js/actions/clickVerticalBarChart.js"></script>
 
     <script type="text/javascript" src="js/helpFunctions/getPlace.js"></script>
     <script type="text/javascript" src="js/helpFunctions/addToLi.js"></script>
@@ -23,9 +24,9 @@
     <script type="text/javascript" src="js/helpFunctions/addToSelection.js"></script>
     <script type="text/javascript" src="js/helpFunctions/prediction.js"></script>
     <script type="text/javascript" src="js/helpFunctions/countCorrelation.js"></script>
-    <script type="text/javascript" src="js/helpFunctions/convertToScrore.js"></script>
     <script type="text/javascript" src="js/helpFunctions/countAverage.js"></script>
     <script type="text/javascript" src="js/helpFunctions/getSumOfScoreArr.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/createTable.js"></script>
 
 
     <link rel="stylesheet" href="css/pieChart.css">
@@ -45,25 +46,43 @@
         <div id="pieText"></div>
     </ul>
     <ul class="container">
-        <ul id="Text0" onclick="openMore()" hidden>
+        <ul id="Text0" hidden>
             <h1 id="1sub0"></h1>
             <h2 id="2sub0"></h2>
             <h3 id="3sub0"></h3>
             <li id="sub0"></li>
-            <span class="closer" data-close=""></span>
         </ul>
 
-        <ul id="Text1" onclick="openMore()" hidden>
+        <ul id="Text1" hidden>
             <h1 id="1sub1"></h1>
             <h2 id="2sub1"></h2>
             <h3 id="3sub1"></h3>
             <li id="sub1"></li>
-            <span class="closer" data-close=""></span>
         </ul>
     </ul>
     <ul class="container">
         <li id="verticalBarChart"></li>
         <p id="verticalBarText"></p>
+    </ul>
+    <ul class="container">
+        <ul id="table-0" hidden>
+            <table>
+                <th id="table-0-ege">ЕГЭ</th>
+                <th id="table-0-ex">Экзамен</th>
+            </table>
+        </ul>
+        <ul id="table-1" hidden>
+            <table>
+                <th id="table-1-ege">ЕГЭ</th>
+                <th id="table-1-ex">Экзамен</th>
+            </table>
+        </ul>
+        <ul id="table-2" hidden>
+            <table>
+                <th id="table-2-ege">ЕГЭ</th>
+                <th id="table-2-ex">Экзамен</th>
+            </table>
+        </ul>
     </ul>
 
     <div id="correlationMatrix"></div>
@@ -113,14 +132,18 @@
         const test = request.response;
         const jsonObj = JSON.parse(test);
         let data = new Data(getId(jsonObj), getOneSubject1(jsonObj),
-            getOneSubject2(jsonObj), getOneSubject3(jsonObj), getGender(jsonObj), getEducationType(jsonObj), getFields(jsonObj));
-        addToLi0(getPlace(countCorrelation(data.getExamScore, data.getEgeScore), countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod), countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
-        addToLi1(getPlace(countCorrelation(data.getExamScore, data.getEgeScore), countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod), countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
+            getOneSubject2(jsonObj), getOneSubject3(jsonObj),
+            getGender(jsonObj), getEducationType(jsonObj), getFields(jsonObj));
+
+        addToLists(getPlace(countCorrelation(data.getExamScore, data.getEgeScore),
+            countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod),
+            countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
 
         addToSelection(data.subjectsArrEge);
         prediction(data);
         addToPie(data.subjectsArrEge);
         addToVerticalBar(data.subjectsArrEge);
+        createTable(data);
 
         zingchart.render({
             id: 'pieChart',
@@ -157,7 +180,12 @@
             width: '100%',
         });
     };
-    clickToPieChart("pieChart", "Text0", "Text1", "pieChart-graph-id0-plotset-plot-0-node-0", "pieChart-graph-id0-plotset-plot-1-node-0");
+    clickChart("pieChart", "Text0", "Text1", "pieChart-graph-id0-plotset-plot-0-node-0", "pieChart-graph-id0-plotset-plot-1-node-0");
+    clickVerticalBarChart("verticalBarChart", "table-0", "table-1", "table-2",
+        "verticalBarChart-graph-id0-plotset-plot-0-node-0",
+        "verticalBarChart-graph-id0-plotset-plot-0-node-1",
+        "verticalBarChart-graph-id0-plotset-plot-0-node-2");
+
 </script>
 </body>
 </html>

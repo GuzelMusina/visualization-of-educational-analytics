@@ -28,4 +28,23 @@ body {
     height: 0;
     width: 0;
 }
+table{
+    font-family: 'Open Sans';
+    background-color: white;
+}
+#table-0{
+    padding-right: 20%;
+}
+#table-1{
+    padding-right: 20%;
+}
+#table-3{
+    padding-right: 20%;
+}
+tr{
+    background-color: white;
+}
 
+th{
+    background-color: white;
+}

@@ -32,7 +32,7 @@ function Data(ids, subj1, subj2, subj3, array_of_gender, array_of_education_type
             },
             getEgeScore: {
                 get() {
-                    return getSumOfScoreArr(subj1[1], subj2[1], subj3[1]);
+                    return getSumOfScoreArr(subj1[2], subj2[2], subj3[2]);
                 }
             },
             getExamScore: {
@@ -57,17 +57,17 @@ function Data(ids, subj1, subj2, subj3, array_of_gender, array_of_education_type
             },
             sub1EgeMod: {
                 get() {
-                    return convertToScore(subj1[1]);
+                    return subj1[2];
                 }
             },
             sub2EgeMod: {
                 get() {
-                    return convertToScore(subj2[1]);
+                    return subj2[2];
                 }
             },
             sub3EgeMod: {
                 get() {
-                    return convertToScore(subj3[1]);
+                    return subj3[2];
                 }
             },
             sub1Ex: {
@@ -88,17 +88,17 @@ function Data(ids, subj1, subj2, subj3, array_of_gender, array_of_education_type
             subjectsArrEge: {
                 get: function () {
                     let newArr = [];
-                    newArr.push(subj1[3]);
-                    newArr.push(subj2[3]);
-                    newArr.push(subj3[3]);
+                    newArr.push(subj1[4]);
+                    newArr.push(subj2[4]);
+                    newArr.push(subj3[4]);
                     return newArr;
                 }
             },
             subjectsArrEx: {
                 get: function () {
-                    newArr.push(subj1[2]);
-                    newArr.push(subj2[2]);
-                    newArr.push(subj3[2]);
+                    newArr.push(subj1[3]);
+                    newArr.push(subj2[3]);
+                    newArr.push(subj3[3]);
                     return newArr;
                 }
             }
