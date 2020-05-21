@@ -6,6 +6,8 @@
     <title>Correlation</title>
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
     <script type="text/javascript" src="js/graphics/PieChart.js"></script>
     <script type="text/javascript" src="js/graphics/VerticalBarChart.js"></script>
     <script type="text/javascript" src="js/graphics/CorrelationMatrix.js"></script>
@@ -27,6 +29,7 @@
     <script type="text/javascript" src="js/helpFunctions/countAverage.js"></script>
     <script type="text/javascript" src="js/helpFunctions/getSumOfScoreArr.js"></script>
     <script type="text/javascript" src="js/helpFunctions/createTable.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToCorrelationMatrixText.js"></script>
 
 
     <link rel="stylesheet" href="css/pieChart.css">
@@ -37,55 +40,85 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="css/popup.style.css">
     <link rel="stylesheet" href="css/filtration.css">
+    <link rel="stylesheet" href="css/table.css">
+
 </head>
 <body>
 <div id="box">
+    <div id="correlationMatrix"></div>
     <ul class="container">
-
+        <div class="wrap">
+            <div class="btn-box">
+                <button type="button" class="btn btn-success" data-modal="modal_2">Подробнее</button>
+            </div>
+            <div class="overlay" data-close=""></div>
+            <div id="modal_2" class="dlg-modal dlg-modal-slide">
+                <span class="closer" data-close=""></span>
+                <h3 id="cor-des-1"></h3>
+            </div>
+        </div>
+    </ul>
+    <ul class="container">
         <li id="pieChart"></li>
-        <div id="pieText"></div>
+        <div id="pie-des-1"></div>
     </ul>
     <ul class="container">
-        <ul id="Text0" hidden>
-            <h1 id="1sub0"></h1>
-            <h2 id="2sub0"></h2>
-            <h3 id="3sub0"></h3>
-            <li id="sub0"></li>
+        <ul id="pie-des-2" hidden>
+            <h1 id="pie-des-1-1"></h1>
+            <h2 id="pie-des-1-2"></h2>
+            <h3 id="pie-des-1-3"></h3>
+            <h4 id="pie-des-1-4"></h4>
         </ul>
 
-        <ul id="Text1" hidden>
-            <h1 id="1sub1"></h1>
-            <h2 id="2sub1"></h2>
-            <h3 id="3sub1"></h3>
-            <li id="sub1"></li>
+        <ul id="pie-des-3" hidden>
+            <h1 id="pie-des-2-1"></h1>
+            <h2 id="pie-des-2-2"></h2>
+            <h3 id="pie-des-2-3"></h3>
+            <h4 id="pie-des-2-4"></h4>
         </ul>
     </ul>
+
+    <script>
+        clickChart("pieChart", "pie-des-2", "pie-des-3",
+        "pieChart-graph-id0-plotset-plot-0-node-0",
+        "pieChart-graph-id0-plotset-plot-1-node-0");
+    </script>
+
     <ul class="container">
         <li id="verticalBarChart"></li>
-        <p id="verticalBarText"></p>
+        <p id="vb-des-1"></p>
     </ul>
+
     <ul class="container">
         <ul id="table-0" hidden>
+            <h4 id="vb-des-2"></h4>
             <table>
                 <th id="table-0-ege">ЕГЭ</th>
                 <th id="table-0-ex">Экзамен</th>
             </table>
         </ul>
         <ul id="table-1" hidden>
+            <h4 id="vb-des-3"></h4>
             <table>
                 <th id="table-1-ege">ЕГЭ</th>
                 <th id="table-1-ex">Экзамен</th>
             </table>
         </ul>
         <ul id="table-2" hidden>
+            <h4 id="vb-des-4"></h4>
             <table>
                 <th id="table-2-ege">ЕГЭ</th>
                 <th id="table-2-ex">Экзамен</th>
             </table>
         </ul>
     </ul>
+    <script>
+        clickVerticalBarChart("verticalBarChart", "table-0", "table-1", "table-2",
+        "verticalBarChart-graph-id0-plotset-plot-0-node-0",
+        "verticalBarChart-graph-id0-plotset-plot-0-node-1",
+        "verticalBarChart-graph-id0-plotset-plot-0-node-2");
+    </script>
 
-    <div id="correlationMatrix"></div>
     <div id="filtration"></div>
 
     <ul class="container">
@@ -135,15 +168,29 @@
             getOneSubject2(jsonObj), getOneSubject3(jsonObj),
             getGender(jsonObj), getEducationType(jsonObj), getFields(jsonObj));
 
-        addToLists(getPlace(countCorrelation(data.getExamScore, data.getEgeScore),
+        addToLi1(getPlace(countCorrelation(data.getExamScore, data.getEgeScore),
             countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod),
-            countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge));
+            countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge),
+            "pie-des-1-1",
+            "pie-des-1-2",
+            "pie-des-1-3",
+            "pie-des-1-4");
+
+        addToLi2(getPlace(countCorrelation(data.getExamScore, data.getEgeScore),
+            countCorrelation(data.sub1Ex, data.sub1EgeMod), countCorrelation(data.sub2Ex, data.sub2EgeMod),
+            countCorrelation(data.sub3Ex, data.sub3EgeMod), data.subjectsArrEge),
+            "pie-des-2-1",
+            "pie-des-2-2",
+            "pie-des-2-3",
+            "pie-des-2-4");
 
         addToSelection(data.subjectsArrEge);
         prediction(data);
         addToPie(data.subjectsArrEge);
         addToVerticalBar(data.subjectsArrEge);
-        createTable(data);
+        createTable(data, "table-0-ege", "table-0-ex", "table-1-ege", "table-1-ex",
+            "table-2-ege", "table-2-ex", "vb-des-2", "vb-des-3", "vb-des-4");
+        addToCorMatTxt("cor-des-1");
 
         zingchart.render({
             id: 'pieChart',
@@ -180,11 +227,6 @@
             width: '100%',
         });
     };
-    clickChart("pieChart", "Text0", "Text1", "pieChart-graph-id0-plotset-plot-0-node-0", "pieChart-graph-id0-plotset-plot-1-node-0");
-    clickVerticalBarChart("verticalBarChart", "table-0", "table-1", "table-2",
-        "verticalBarChart-graph-id0-plotset-plot-0-node-0",
-        "verticalBarChart-graph-id0-plotset-plot-0-node-1",
-        "verticalBarChart-graph-id0-plotset-plot-0-node-2");
 
 </script>
 </body>

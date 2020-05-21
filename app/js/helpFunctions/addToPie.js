@@ -9,14 +9,14 @@ request4.responseType = 'text';
 request4.send();
 
 function addToPie(arr) {
-    document.getElementById("pieText").innerHTML = request3.responseText;
+    document.getElementById("pie-des-1").innerHTML = request3.responseText;
     for(let i=0; i<arr.length; i++){
-        document.getElementById("pieText").innerHTML += " " + arr[i] + " ";
+        document.getElementById("pie-des-1").innerHTML += " " + arr[i] + " ";
     }
 }
 function addToVerticalBar(arr) {
-    document.getElementById("verticalBarText").innerHTML = request3.responseText;
+    document.getElementById("vb-des-1").innerHTML = request3.responseText;
     for(let i=0; i<arr.length; i++){
-        document.getElementById("verticalBarText").innerHTML += " " + arr[i] + " ";
+        document.getElementById("vb-des-1").innerHTML += " " + arr[i] + " ";
     }
 }
