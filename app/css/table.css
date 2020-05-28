@@ -1,5 +1,5 @@
 #table-0 {
-    width: 10%;
+    width: 12%;
     font-family: 'Open Sans';
     color: #fdb462;
     background-color: #8993c7 ;
@@ -8,10 +8,12 @@
     position: fixed;
     z-index: 99;
     top: 0;
-    right: 0;
+    padding-right: 10px;
+    right: 2%;
+    overflow: auto;
 }
 #table-1{
-    width: 10%;
+    width: 12%;
     font-family: 'Open Sans';
     color: #8993c7;
     background-color: #fdb462 ;
@@ -20,11 +22,12 @@
     position: fixed;
     z-index: 99;
     top: 0;
-    right: 10%;
+    padding-right: 10px;
+    right: 14%;
     overflow: auto;
 }
 #table-2 {
-    width: 10%;
+    width: 12%;
     font-family: 'Open Sans';
     color: #fdb462;
     background-color:#6FB07F;
@@ -33,11 +36,12 @@
     position: fixed;
     z-index: 99;
     top: 0;
-    right: 20%;
+    right: 26%;
+    padding-right: 10px;
     overflow: auto;
 }
 th{
-    font-size: x-small;
+    font-size: small;
     margin-left: 10px;
     border: dashed 1px white;
 }

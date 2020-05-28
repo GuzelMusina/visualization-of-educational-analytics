@@ -11,7 +11,6 @@
     <script type="text/javascript" src="js/graphics/PieChart.js"></script>
     <script type="text/javascript" src="js/graphics/VerticalBarChart.js"></script>
     <script type="text/javascript" src="js/graphics/CorrelationMatrix.js"></script>
-    <script type="text/javascript" src="js/graphics/Filtration.js"></script>
 
     <script type="text/javascript" src="js/model/Data.js"></script>
 
@@ -119,8 +118,6 @@
         "verticalBarChart-graph-id0-plotset-plot-0-node-2");
     </script>
 
-    <div id="filtration"></div>
-
     <ul class="container">
         <div class="wrap">
             <div class="btn-box">
@@ -219,12 +216,6 @@
         zingchart.render({
             id: 'correlationMatrix',
             data: getCorrelationMatrix(data),
-        });
-        zingchart.render({
-            id: 'filtration',
-            data: getFiltration(data),
-            height: '100%',
-            width: '100%',
         });
     };
 
