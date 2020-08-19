@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>FilterPattern</title>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+
+    <script type="text/javascript" src="js/graphics/FilterChart.js"></script>
+    <script type="text/javascript" src="js/graphics/ElementGraph.js"></script>
+    <script type="text/javascript" src="js/model/Data.js"></script>
+    <script type="text/javascript" src="js/actions/clickFilterChart.js"></script>
+    <script type="text/javascript" src="js/actions/elementDescription.js"></script>
+
+    <script type="text/javascript" src="js/data/ReadJSON.js"></script>
+    <script type="text/javascript" src="js/data/createChartData.js"></script>
+
+    <script type="text/javascript" src="js/helpFunctions/getPlace.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToLi.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToPie.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToSelection.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/prediction.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/countCorrelation.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/countAverage.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/getSumOfScoreArr.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/createTable.js"></script>
+    <script type="text/javascript" src="js/helpFunctions/addToCorrelationMatrixText.js"></script>
+
+    <link rel="stylesheet" href="css/filterChart.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/description.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="css/popup.style.css">
+    <link rel="stylesheet" href="css/filtration.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/elementPageByGender.css">
+
+</head>
+
+<body class="zc-body">
+
+<div id="filterChart" class="chart--container" data-modal="modal_2"></div>
+<div class="wrap">
+    <div class="overlay" data-close=""></div>
+    <div id="modal_2" class="dlg-modal dlg-modal-slide">
+        <span class="closer" data-close=""></span>
+        <!--        <p><img id="gender" alt="Пол"></p>-->
+        <div id="myChart" class="chart--container">
+            <select id="tree-aspect">
+                <option value="tree-right" selected>Right to left</option>
+                <option value="tree-left">Left to right</option>
+                <option value="tree-up">Bottom up</option>
+                <option value="tree-down">Top Down</option>
+                <option value="tree-radial">Circle</option>
+            </select>
+            <label for="tree-node">Node Connector Type</label>
+            <select id="tree-node">
+                <option value="arc" selected>Arc</option>
+                <option value="line">Line</option>
+                <option value="side-before">Side Before</option>
+                <option value="side-after">Side After</option>
+                <option value="side-between">Side Between</option>
+                <option value="split">Split</option>
+                <option value="sibling">Sibling</option>
+            </select>
+            <label for="tree-node">Node Shape</label>
+            <select id="tree-node-shape">
+                <option value="circle" selected>Circle</option>
+                <option value="square">Square</option>
+                <option value="diamond">Diamond</option>
+                <option value="triangle">Triangle</option>
+                <option value="star5">Star</option>
+                <option value="star6">Star Type 2</option>
+                <option value="star7">Star Type 3</option>
+                <option value="star8">Star Type 4</option>
+                <option value="rpoly5">Polygon</option>
+                <option value="gear5">Gear</option>
+                <option value="gear6">Gear 2</option>
+                <option value="gear7">Gear 3</option>
+                <option value="gear8">Gear 4</option>
+            </select>
+        </div>
+    </div>
+</div>
+<script>
+    // change tree layout
+    document.getElementById('tree-aspect').addEventListener('change', function (e) {
+        chartConfig.options.aspect = e.srcElement.value;
+        zingchart.exec('myChart', 'setdata', {
+            data: chartConfig
+        });
+    });
+
+    // change tree connector
+    document.getElementById('tree-node').addEventListener('change', function (e) {
+        chartConfig.options.link.aspect = e.srcElement.value;
+        zingchart.exec('myChart', 'setdata', {
+            data: chartConfig
+        });
+    });
+
+    // change node type
+    document.getElementById('tree-node-shape').addEventListener('change', function (e) {
+        chartConfig.options.node.type = e.srcElement.value;
+        zingchart.exec('myChart', 'setdata', {
+            data: chartConfig
+        });
+    })
+</script>
+
+<script>var typeAnimate = 'slide';</script>
+<script src="js/actions/popup-css3.function.js"></script>
+<script src="js/actions/windowSetUp.js"></script>
+<script>
+    let request = new XMLHttpRequest();
+    request.open('GET', './resources/file.json', true);
+    request.responseType = 'text';
+    request.send();
+
+    request.onload = function () {
+        const test = request.response;
+        const jsonObj = JSON.parse(test);
+        let data = new Data(getId(jsonObj), getOneSubject1(jsonObj),
+            getOneSubject2(jsonObj), getOneSubject3(jsonObj),
+            getGender(jsonObj), getEducationType(jsonObj), getFields(jsonObj));
+
+        zingchart.render({
+            id: 'filterChart',
+            data: getFilterChart(data),
+            height: '100%',
+            width: '100%',
+        });
+
+        let chartConfig = [];
+        element = document.getElementById("filterChart");
+        element.addEventListener('click', function (event) {
+            var target = event.target;
+
+            for (let i = 0; i < data.ids.length; i++) {
+                if (target.id === 'filterChart-graph-pp_ppside1-plotset-plot-0-node-' + i) {
+                    chartConfig.push(data.ids[i]);
+                    chartConfig.push(i);
+                    chartConfig.push(data.getGender[i]);
+                    chartConfig.push(data);
+                    alert(chartConfig);
+                }
+                if (target.id === 'filterChart-graph-pp_ppside2-plotset-plot-1-node-' + i) {
+                    chartConfig.push(data.ids[i]);
+                    chartConfig.push(i);
+                    chartConfig.push(data.getGender[i]);
+                    chartConfig.push(data);
+                }
+            }
+        });
+
+        zingchart.render({
+            id: 'myChart',
+            data: getElementGraph(chartConfig),
+            height: '95%',
+            width: '100%',
+            output: 'canvas'
+        });
+    };
+</script>
+</body>
+</html>

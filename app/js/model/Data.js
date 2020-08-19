@@ -8,7 +8,7 @@ function Data(ids, subj1, subj2, subj3, array_of_gender, array_of_education_type
                 get() {
                     let idsString = [];
                     for (let i = 0; i < ids.length; i++) {
-                    idsString.push(ids[i].toString());
+                        idsString.push(ids[i].toString());
                     }
                     return idsString;
                 }
@@ -33,6 +33,11 @@ function Data(ids, subj1, subj2, subj3, array_of_gender, array_of_education_type
             getEgeScore: {
                 get() {
                     return getSumOfScoreArr(subj1[2], subj2[2], subj3[2]);
+                }
+            },
+            getEgeScoreReal: {
+                get() {
+                    return getSumOfScoreArr(subj1[1], subj2[1], subj3[1]);
                 }
             },
             getExamScore: {
@@ -96,6 +101,7 @@ function Data(ids, subj1, subj2, subj3, array_of_gender, array_of_education_type
             },
             subjectsArrEx: {
                 get: function () {
+                    let newArr = [];
                     newArr.push(subj1[3]);
                     newArr.push(subj2[3]);
                     newArr.push(subj3[3]);
