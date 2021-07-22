@@ -5,7 +5,7 @@
     "chart.js": "latest",
     "read-excel-file": "^4.0.6",
     "write-file-p": "^1.0.7",
-    "xlsx": "^0.15.6",
+    "xlsx": "^0.17.0",
     "zingchart": "^2.9.0"
   }
 }
