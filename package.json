@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "chart.js": "latest",
-    "read-excel-file": "^4.0.6",
+    "read-excel-file": "^5.5.1",
     "write-file-p": "^1.0.7",
     "xlsx": "^0.15.6",
     "zingchart": "^2.9.0"
